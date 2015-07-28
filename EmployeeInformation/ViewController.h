@@ -14,6 +14,5 @@
 
 - (IBAction)addNewRecord:(id)sender;
 - (IBAction)browseRecord:(id)sender;
-
+- (IBAction)searchRecord:(id)sender;
 @end
-

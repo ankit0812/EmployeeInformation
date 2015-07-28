@@ -20,6 +20,7 @@
 		93466C3A1B663C5400B7A721 /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93466C391B663C5400B7A721 /* BrowseViewController.m */; };
 		93466C3C1B665EB100B7A721 /* empdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 93466C3B1B665EB100B7A721 /* empdb.sqlite */; };
 		93BB2D6E1B6733DE009360D9 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BB2D6D1B6733DE009360D9 /* DetailViewController.m */; };
+		93F647E81B67B93900F14151 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F647E71B67B93900F14151 /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		93466C3B1B665EB100B7A721 /* empdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = empdb.sqlite; sourceTree = "<group>"; };
 		93BB2D6C1B6733DE009360D9 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		93BB2D6D1B6733DE009360D9 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		93F647E61B67B93900F14151 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		93F647E71B67B93900F14151 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				93466C391B663C5400B7A721 /* BrowseViewController.m */,
 				93BB2D6C1B6733DE009360D9 /* DetailViewController.h */,
 				93BB2D6D1B6733DE009360D9 /* DetailViewController.m */,
+				93F647E61B67B93900F14151 /* SearchViewController.h */,
+				93F647E71B67B93900F14151 /* SearchViewController.m */,
 			);
 			path = EmployeeInformation;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				93466C071B66301E00B7A721 /* main.m in Sources */,
 				93466C3A1B663C5400B7A721 /* BrowseViewController.m in Sources */,
 				93466C2E1B66305D00B7A721 /* DBManager.m in Sources */,
+				93F647E81B67B93900F14151 /* SearchViewController.m in Sources */,
 				93BB2D6E1B6733DE009360D9 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

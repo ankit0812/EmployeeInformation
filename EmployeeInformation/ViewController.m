@@ -30,9 +30,17 @@
     [self performSegueWithIdentifier:@"idSegueEditInfo" sender:self];
 }
 
-- (IBAction)browseRecord:(id)sender {
+- (IBAction)browseRecord:(id)sender
+{
     [self performSegueWithIdentifier:@"browse" sender:self];
 }
+
+- (IBAction)searchRecord:(id)sender
+{
+    [self performSegueWithIdentifier:@"search" sender:self];
+}
+
+
 
 
 @end
