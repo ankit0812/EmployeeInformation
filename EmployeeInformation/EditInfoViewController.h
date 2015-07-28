@@ -8,14 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol EditInfoViewControllerDelegate
-
--(void)editingInfoWasFinished;
-
-@end
-
-
-@interface EditInfoViewController : UIViewController <UITextFieldDelegate>
+@interface EditInfoViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITextField *txtEmpID;
@@ -34,10 +27,17 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTagLine;
 
-@property (nonatomic, strong) id<EditInfoViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (IBAction)selectPhoto:(UIButton *)sender; // Button for selecting photos from Gallery
 
+- (IBAction)takePhoto:(UIButton *)sender;   // Button for taking
 
 - (IBAction)saveInfo:(id)sender;
+
+- (void)saveImage:(UIImageView *)imageView imgName:(NSString *)name;
+
+
+
 
 @end

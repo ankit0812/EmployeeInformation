@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EditInfoViewController.h"
 
-@interface BrowseViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, EditInfoViewControllerDelegate>
+@interface BrowseViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblEmp;
 
 @end
-	

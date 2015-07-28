@@ -8,8 +8,7 @@
 
 #import "BrowseViewController.h"
 #import "DBManager.h"
-
-
+#import "DetailViewController.h"
 
 @interface BrowseViewController ()
 
@@ -51,12 +50,14 @@
 }
 */
 
--(void)loadData{
+-(void)loadData
+{
     // Form the query.
-    NSString *query = @"select * from empInfo";
+    NSString *query = @"select * from empInfo order by empID";
     
     // Get the results.
-    if (self.arrEmpInfo != nil) {
+    if (self.arrEmpInfo != nil)
+    {
         self.arrEmpInfo = nil;
     }
     self.arrEmpInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -65,7 +66,8 @@
     [self.tblEmp reloadData];
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
@@ -75,7 +77,8 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 60.0;
 }
 
@@ -87,28 +90,56 @@
     NSInteger indexOfEmpId = [self.dbManager.arrColumnNames indexOfObject:@"empID"];
     NSInteger indexOfFirstName = [self.dbManager.arrColumnNames indexOfObject:@"firstName"];
     NSInteger indexOfLastName = [self.dbManager.arrColumnNames indexOfObject:@"lastName"];
-    NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"age"];
-    NSInteger indexOfDesignation = [self.dbManager.arrColumnNames indexOfObject:@"designation"];
-    NSInteger indexOfDepartment = [self.dbManager.arrColumnNames indexOfObject:@"department"];
-    NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"image"];
-    NSInteger indexOfTagLine = [self.dbManager.arrColumnNames indexOfObject:@"tagLine"];
     
+ //   NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"age"];
+   // NSInteger indexOfDesignation = [self.dbManager.arrColumnNames indexOfObject:@"designation"];
+    // NSInteger indexOfDepartment = [self.dbManager.arrColumnNames indexOfObject:@"department"];
+    // NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"image"];
+    // NSInteger indexOfTagLine = [self.dbManager.arrColumnNames indexOfObject:@"tagLine"];
+    
+   
     
     // Set the loaded data to the appropriate cell labels.
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@",[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmpId],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstName],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastName],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDesignation],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDepartment],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTagLine]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstName],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastName]];
     
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"EmpID: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmpId]];
     
     return cell;
 }
 
--(void)editingInfoWasFinished{
-    // Reload the data.
-    [self loadData];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"detailView"])
+    {
+        //NSInteger indexOfEmpId = [self.dbManager.arrColumnNames indexOfObject:@"empID"];
+        NSInteger indexOfFirstName = [self.dbManager.arrColumnNames indexOfObject:@"firstName"];
+        NSInteger indexOfLastName = [self.dbManager.arrColumnNames indexOfObject:@"lastName"];
+        NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"age"];
+        NSInteger indexOfDesignation = [self.dbManager.arrColumnNames indexOfObject:@"designation"];
+        NSInteger indexOfDepartment = [self.dbManager.arrColumnNames indexOfObject:@"department"];
+        NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"image"];
+        NSInteger indexOfTagLine = [self.dbManager.arrColumnNames indexOfObject:@"tagLine"];
+        
+        
+        NSIndexPath *indexPath = [self.tblEmp indexPathForSelectedRow];
+        
+        DetailViewController *destViewController = segue.destinationViewController;
+        
+      //  destViewController.actualFirstName  = [NSString stringWithFormat:@"EmpID: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmpId]];
+        destViewController.actualFirstName  = [NSString stringWithFormat:@"First Name : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstName]];
+        destViewController.actualLastName  = [NSString stringWithFormat:@"Last Name : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastName]];
+        destViewController.actualAge  = [NSString stringWithFormat:@"Age : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge]];
+        destViewController.actualDesignation  = [NSString stringWithFormat:@"Designation: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDesignation]];
+        destViewController.actualDepartment  = [NSString stringWithFormat:@"Department : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDepartment]];
+        destViewController.actualImageView  = [NSString stringWithFormat:@"%@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage]];
+        destViewController.actualTagLine  = [NSString stringWithFormat:@"Tagline: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTagLine]];
+        
+        
+        
+        NSLog(@"%@",destViewController.actualImageView );
+        
+    }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    EditInfoViewController *editInfoViewController = [segue destinationViewController];
-    editInfoViewController.delegate = self;
-}
 
 @end

@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSLog(@"app dir: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,8 +26,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)addNewRecord:(id)sender
-{
+- (IBAction)addNewRecord:(id)sender {
     [self performSegueWithIdentifier:@"idSegueEditInfo" sender:self];
 }
 

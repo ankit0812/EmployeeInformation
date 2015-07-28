@@ -17,8 +17,9 @@
 		93466C2B1B66302700B7A721 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93466C2A1B66302700B7A721 /* libsqlite3.dylib */; };
 		93466C2E1B66305D00B7A721 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93466C2D1B66305D00B7A721 /* DBManager.m */; };
 		93466C331B66355100B7A721 /* EditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93466C321B66355100B7A721 /* EditInfoViewController.m */; };
-		93466C371B663B3E00B7A721 /* empdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 93466C361B663B3E00B7A721 /* empdb.sqlite */; };
 		93466C3A1B663C5400B7A721 /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93466C391B663C5400B7A721 /* BrowseViewController.m */; };
+		93466C3C1B665EB100B7A721 /* empdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 93466C3B1B665EB100B7A721 /* empdb.sqlite */; };
+		93BB2D6E1B6733DE009360D9 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BB2D6D1B6733DE009360D9 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +51,11 @@
 		93466C2D1B66305D00B7A721 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		93466C311B66355100B7A721 /* EditInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoViewController.h; sourceTree = "<group>"; };
 		93466C321B66355100B7A721 /* EditInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoViewController.m; sourceTree = "<group>"; };
-		93466C361B663B3E00B7A721 /* empdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = empdb.sqlite; sourceTree = "<group>"; };
 		93466C381B663C5400B7A721 /* BrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseViewController.h; sourceTree = "<group>"; };
 		93466C391B663C5400B7A721 /* BrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseViewController.m; sourceTree = "<group>"; };
+		93466C3B1B665EB100B7A721 /* empdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = empdb.sqlite; sourceTree = "<group>"; };
+		93BB2D6C1B6733DE009360D9 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		93BB2D6D1B6733DE009360D9 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +80,7 @@
 		93466BF81B66301E00B7A721 = {
 			isa = PBXGroup;
 			children = (
-				93466C361B663B3E00B7A721 /* empdb.sqlite */,
+				93466C3B1B665EB100B7A721 /* empdb.sqlite */,
 				93466C2A1B66302700B7A721 /* libsqlite3.dylib */,
 				93466C031B66301E00B7A721 /* EmployeeInformation */,
 				93466C1D1B66301E00B7A721 /* EmployeeInformationTests */,
@@ -111,6 +114,8 @@
 				93466C321B66355100B7A721 /* EditInfoViewController.m */,
 				93466C381B663C5400B7A721 /* BrowseViewController.h */,
 				93466C391B663C5400B7A721 /* BrowseViewController.m */,
+				93BB2D6C1B6733DE009360D9 /* DetailViewController.h */,
+				93BB2D6D1B6733DE009360D9 /* DetailViewController.m */,
 			);
 			path = EmployeeInformation;
 			sourceTree = "<group>";
@@ -221,7 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93466C371B663B3E00B7A721 /* empdb.sqlite in Resources */,
+				93466C3C1B665EB100B7A721 /* empdb.sqlite in Resources */,
 				93466C101B66301E00B7A721 /* Main.storyboard in Resources */,
 				93466C151B66301E00B7A721 /* LaunchScreen.xib in Resources */,
 				93466C121B66301E00B7A721 /* Images.xcassets in Resources */,
@@ -248,6 +253,7 @@
 				93466C071B66301E00B7A721 /* main.m in Sources */,
 				93466C3A1B663C5400B7A721 /* BrowseViewController.m in Sources */,
 				93466C2E1B66305D00B7A721 /* DBManager.m in Sources */,
+				93BB2D6E1B6733DE009360D9 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +450,7 @@
 				93466C261B66301E00B7A721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93466C271B66301E00B7A721 /* Build configuration list for PBXNativeTarget "EmployeeInformationTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +459,7 @@
 				93466C291B66301E00B7A721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
