@@ -33,9 +33,9 @@
 
 - (IBAction)takePhoto:(UIButton *)sender;   // Button for taking
 
-- (IBAction)saveInfo:(id)sender;
+- (IBAction)saveInfo:(id)sender;            //Save the info
 
-- (void)saveImage:(UIImageView *)imageView imgName:(NSString *)name;
+- (void)saveImage:(UIImageView *)imageView imgName:(NSString *)name;    //Function to save the image
 
 
 

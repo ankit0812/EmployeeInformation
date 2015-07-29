@@ -106,43 +106,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQR-ij-y4b">
-                                <rect key="frame" x="240" y="305" width="120" height="30"/>
+                                <rect key="frame" x="240" y="170" width="120" height="30"/>
                                 <state key="normal" title="Search by EmpID">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2De-I0-raP" kind="show" id="awm-Ef-n9g"/>
+                                    <action selector="searchButton:" destination="AWm-Ld-0xF" eventType="touchUpInside" id="Ev1-iM-w9u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fox-Np-l6w">
-                                <rect key="frame" x="169" y="348" width="263" height="30"/>
+                                <rect key="frame" x="169" y="359" width="263" height="30"/>
                                 <state key="normal" title="Search by Name and Designation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="searchNameDes:" destination="AWm-Ld-0xF" eventType="touchUpInside" id="tBN-24-4Tw"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name &amp; Designation or Employee ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KFV-s3-6LO">
-                                <rect key="frame" x="169" y="252" width="263" height="30"/>
+                                <rect key="frame" x="169" y="132" width="263" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="263" id="GLv-gx-QEK"/>
+                                    <constraint firstAttribute="width" constant="263" id="TXD-t5-0CK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Designation" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGr-dC-16F">
+                                <rect key="frame" x="169" y="323" width="263" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SE3-fb-ctt">
+                                <rect key="frame" x="169" y="285" width="263" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fox-Np-l6w" firstAttribute="centerX" secondItem="bQR-ij-y4b" secondAttribute="centerX" id="28y-Pe-a7u"/>
-                            <constraint firstItem="KFV-s3-6LO" firstAttribute="centerX" secondItem="ERl-wK-dzu" secondAttribute="centerX" id="6U5-y5-aKI"/>
-                            <constraint firstItem="KFV-s3-6LO" firstAttribute="leading" secondItem="fox-Np-l6w" secondAttribute="leading" id="Le8-8V-qeH"/>
-                            <constraint firstItem="KFV-s3-6LO" firstAttribute="top" secondItem="iGU-0d-acl" secondAttribute="bottom" constant="188" id="MTz-mw-k0e"/>
-                            <constraint firstItem="fox-Np-l6w" firstAttribute="top" secondItem="bQR-ij-y4b" secondAttribute="bottom" constant="13" id="QMY-Cs-ztj"/>
-                            <constraint firstItem="bQR-ij-y4b" firstAttribute="top" secondItem="KFV-s3-6LO" secondAttribute="bottom" constant="23" id="n4O-fK-xbA"/>
-                            <constraint firstItem="fox-Np-l6w" firstAttribute="trailing" secondItem="KFV-s3-6LO" secondAttribute="trailing" id="tsj-mW-PMb"/>
+                            <constraint firstItem="fox-Np-l6w" firstAttribute="top" secondItem="cGr-dC-16F" secondAttribute="bottom" constant="6" id="6mf-id-7CP"/>
+                            <constraint firstItem="cGr-dC-16F" firstAttribute="leading" secondItem="SE3-fb-ctt" secondAttribute="leading" id="72y-a6-xBl"/>
+                            <constraint firstItem="KFV-s3-6LO" firstAttribute="leading" secondItem="SE3-fb-ctt" secondAttribute="leading" id="8eT-zH-FQI"/>
+                            <constraint firstItem="bQR-ij-y4b" firstAttribute="top" secondItem="KFV-s3-6LO" secondAttribute="bottom" constant="8" symbolic="YES" id="BYV-Xe-WPQ"/>
+                            <constraint firstItem="KFV-s3-6LO" firstAttribute="top" secondItem="iGU-0d-acl" secondAttribute="bottom" constant="68" id="K8U-us-C9B"/>
+                            <constraint firstItem="bQR-ij-y4b" firstAttribute="centerX" secondItem="KFV-s3-6LO" secondAttribute="centerX" id="MO9-az-DGt"/>
+                            <constraint firstItem="KFV-s3-6LO" firstAttribute="centerX" secondItem="ERl-wK-dzu" secondAttribute="centerX" id="Pgc-3J-byy"/>
+                            <constraint firstItem="cGr-dC-16F" firstAttribute="leading" secondItem="fox-Np-l6w" secondAttribute="leading" id="R1N-OY-TQO"/>
+                            <constraint firstItem="cGr-dC-16F" firstAttribute="trailing" secondItem="fox-Np-l6w" secondAttribute="trailing" id="cH7-bB-2Ku"/>
+                            <constraint firstItem="SE3-fb-ctt" firstAttribute="centerY" secondItem="ERl-wK-dzu" secondAttribute="centerY" id="fsh-ty-PJ6"/>
+                            <constraint firstItem="cGr-dC-16F" firstAttribute="top" secondItem="SE3-fb-ctt" secondAttribute="bottom" constant="8" symbolic="YES" id="kXt-dH-cGF"/>
+                            <constraint firstItem="cGr-dC-16F" firstAttribute="trailing" secondItem="SE3-fb-ctt" secondAttribute="trailing" id="lQB-pU-oG2"/>
+                            <constraint firstItem="KFV-s3-6LO" firstAttribute="trailing" secondItem="SE3-fb-ctt" secondAttribute="trailing" id="uxy-wn-127"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="empIDIn" destination="KFV-s3-6LO" id="jW4-CC-FK1"/>
+                        <outlet property="designationValue" destination="cGr-dC-16F" id="3mg-48-OnW"/>
                         <outlet property="empidValue" destination="KFV-s3-6LO" id="MMO-7M-cGO"/>
+                        <outlet property="nameValue" destination="SE3-fb-ctt" id="XCb-1j-Yli"/>
+                        <segue destination="2De-I0-raP" kind="show" identifier="query" id="WkT-Cg-RF9"/>
+                        <segue destination="2De-I0-raP" kind="show" identifier="searchName" id="Z7L-ez-Tu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygv-GT-Wox" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -165,7 +187,7 @@
                                 <rect key="frame" x="0.0" y="1" width="600" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="idCellRecord" textLabel="2Z1-YI-mOp" detailTextLabel="sej-TG-eOT" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="8hI-Wa-y1B">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="idCellRecord" textLabel="2Z1-YI-mOp" detailTextLabel="sej-TG-eOT" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="8hI-Wa-y1B">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8hI-Wa-y1B" id="hAo-CV-KxY">
@@ -454,6 +476,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="awm-Ef-n9g"/>
+        <segue reference="WkT-Cg-RF9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -22,6 +22,9 @@
     
     // Do any additional setup after loading the view.
     
+    //Assigning values that where fetched
+    
+    
     _FirstName.text=_actualFirstName;
     _LastName.text=_actualLastName;
     _Age.text=_actualAge;
@@ -29,6 +32,7 @@
     _Department.text=_actualDepartment;
     _TagLine.text=_actualTagLine;
     _imageView.image=[self loadImage:_actualImageView];
+    
     
 }
 
@@ -57,19 +61,4 @@
     UIImage* image = [UIImage imageWithContentsOfFile:path];
     return image;
 }
-/*
-- (UIImageView *)loadImage: (NSString *)name
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString* path = [documentsDirectory stringByAppendingPathComponent:
-                      name];
-    UIImage* image = [UIImage imageWithContentsOfFile:path];
-    
-    UIImageView *img= [[UIImageView alloc] init]; // frame is a CGRect.
-    img.image = image;
-    
-    return img;
-}*/
 @end

@@ -12,7 +12,7 @@
 
 @interface EditInfoViewController ()
 
-@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) DBManager *dbManager;         //Creating object of the DBManager
 
 @end
 
@@ -34,7 +34,7 @@
     self.txtTagLine.delegate = self;
     
     
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"empdb.sqlite"];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"empdb.sqlite"];     //initializing access with the database
     
 }
 
@@ -54,10 +54,12 @@
 }
 */
 
-- (IBAction)saveInfo:(id)sender
+- (IBAction)saveInfo:(id)sender     //Definition for save info button
 {
-    NSString *name=self.txtEmpID.text;
-    NSString *namePlusExtension = [name stringByAppendingString:@".jpg"];
+    
+    NSString *names=self.txtEmpID.text;
+    NSString *namePlusExtension = [names stringByAppendingString:@".jpg"];
+    
     // Prepare the query string.
     
     NSString *query = [NSString stringWithFormat:@"insert into empInfo values(%d,'%@','%@','%@','%@', '%@', '%@','%@')", [self.txtEmpID.text intValue], self.txtFirstName.text,self.txtLastName.text,self.txtAge.text,self.txtDesignation.text,self.txtDepartment.text,namePlusExtension,self.txtTagLine.text];
@@ -68,7 +70,7 @@
     [self.dbManager executeQuery:query];
     
     
-    
+    //Saving image associated to the documents location
     [self saveImage:_imageView imgName:namePlusExtension];
     
     // If the query was successfully executed then pop the view controller.
@@ -76,7 +78,6 @@
     {
         
         NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
-        
         
         
         // Pop the view controller.
@@ -94,10 +95,10 @@
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
-        
         [message show];
         
     }
+    // If the query was not executed
     else
     {
         NSString *error;
@@ -118,6 +119,7 @@
         
         NSLog(@"Could not execute the query.");
     }
+
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -164,6 +166,8 @@
 
 #pragma mark - Image Picker Controller delegate methods
 
+//Choose Images from gallery
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     
@@ -174,12 +178,16 @@
     
 }
 
+// Cancel choosing images
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
+
+//Definition for saving images
 
 - (void)saveImage: (UIImageView *)imageView imgName:(NSString *)name
 {

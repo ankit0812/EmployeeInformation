@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController
+@interface SearchViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *empidValue;
 
+@property (weak, nonatomic) IBOutlet UITextField *nameValue;
+@property (weak, nonatomic) IBOutlet UITextField *designationValue;
+
+- (IBAction)searchNameDes:(id)sender;
+
+- (IBAction)searchButton:(id)sender;
 @end

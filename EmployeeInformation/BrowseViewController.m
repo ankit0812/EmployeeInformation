@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) DBManager *dbManager;
 
-@property (nonatomic, strong) NSArray *arrEmpInfo;
+@property (nonatomic, strong) NSArray *arrEmpInfo;      //Stores the entire info from the database
 
 
 -(void)loadData;
@@ -23,7 +23,8 @@
 
 @implementation BrowseViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -35,7 +36,9 @@
     [self loadData];
 }
 
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -66,11 +69,14 @@
     [self.tblEmp reloadData];
 }
 
+
+// No. of sections in table
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+//Number of Rows in Section
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arrEmpInfo.count;
@@ -82,6 +88,8 @@
     return 60.0;
 }
 
+//Deque the cell
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue the cell.
@@ -91,15 +99,7 @@
     NSInteger indexOfFirstName = [self.dbManager.arrColumnNames indexOfObject:@"firstName"];
     NSInteger indexOfLastName = [self.dbManager.arrColumnNames indexOfObject:@"lastName"];
     
- //   NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"age"];
-   // NSInteger indexOfDesignation = [self.dbManager.arrColumnNames indexOfObject:@"designation"];
-    // NSInteger indexOfDepartment = [self.dbManager.arrColumnNames indexOfObject:@"department"];
-    // NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"image"];
-    // NSInteger indexOfTagLine = [self.dbManager.arrColumnNames indexOfObject:@"tagLine"];
-    
-   
-    
-    // Set the loaded data to the appropriate cell labels.
+   // Set the loaded data to the appropriate cell labels.
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstName],[[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastName]];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"EmpID: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmpId]];
@@ -107,11 +107,13 @@
     return cell;
 }
 
+//Passing the value to Detail View Controller
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"detailView"])
     {
-        //NSInteger indexOfEmpId = [self.dbManager.arrColumnNames indexOfObject:@"empID"];
+        
         NSInteger indexOfFirstName = [self.dbManager.arrColumnNames indexOfObject:@"firstName"];
         NSInteger indexOfLastName = [self.dbManager.arrColumnNames indexOfObject:@"lastName"];
         NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"age"];
@@ -125,7 +127,6 @@
         
         DetailViewController *destViewController = segue.destinationViewController;
         
-      //  destViewController.actualFirstName  = [NSString stringWithFormat:@"EmpID: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmpId]];
         destViewController.actualFirstName  = [NSString stringWithFormat:@"First Name : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstName]];
         destViewController.actualLastName  = [NSString stringWithFormat:@"Last Name : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastName]];
         destViewController.actualAge  = [NSString stringWithFormat:@"Age : %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge]];
@@ -135,7 +136,7 @@
         destViewController.actualTagLine  = [NSString stringWithFormat:@"Tagline: %@", [[self.arrEmpInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTagLine]];
         
         
-        
+        //To check output on console
         NSLog(@"%@",destViewController.actualImageView );
         
     }
