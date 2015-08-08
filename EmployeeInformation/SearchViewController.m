@@ -29,6 +29,15 @@
     self.nameValue.delegate = self;
     self.designationValue.delegate = self;
     
+    _scroller.delegate=self;
+    [_scroller setShowsHorizontalScrollIndicator:NO];
+    
+    UITapGestureRecognizer *yourTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
+    [self.scroller addGestureRecognizer:yourTap];
+    [self.view addSubview:_scroller];
+    [self.scroller setScrollEnabled:YES];
+
+    
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -45,10 +54,14 @@
 
 }
 
+float oldX;
+
 -(void)viewDidUnload
 {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
     
 }
 
@@ -269,6 +282,11 @@
     _scroller.scrollIndicatorInsets = contentInsets;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x > 0  ||  scrollView.contentOffset.x < 0 )
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+}
 
 
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController <UITextFieldDelegate>
+@interface SearchViewController : UIViewController <UITextFieldDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 
