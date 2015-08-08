@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UIScrollViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITextField *FirstName;
@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *imageViewName;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 
 @property (nonatomic, strong) NSString *actualFirstName;
 @property (nonatomic, strong) NSString *actualLastName;

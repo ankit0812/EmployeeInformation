@@ -23,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     self.txtEmpID.delegate = self;
     self.txtFirstName.delegate = self;
     self.txtLastName.delegate = self;
@@ -33,15 +34,43 @@
     self.txtImage.delegate = self;
     self.txtTagLine.delegate = self;
     
+    _scroller.delegate=self;
+    [_scroller setShowsHorizontalScrollIndicator:NO];
+    
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"empdb.sqlite"];     //initializing access with the database
     
+    UITapGestureRecognizer *yourTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
+    [self.scroller addGestureRecognizer:yourTap];
+    [self.view addSubview:_scroller];
+    [self.scroller setScrollEnabled:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+
 }
+
+float oldX; // here or better in .h interface
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidUnload
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 /*
@@ -121,10 +150,7 @@
     }
 
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
+
 - (IBAction)takePhoto:(UIButton *)sender
 {
     
@@ -207,5 +233,118 @@
         [data writeToFile:path atomically:YES];
     }
 }
+
+
+- (void)scrollTap:(UIGestureRecognizer*)gestureRecognizer{
+    
+    [self.view endEditing:YES];
+}
+
+// Dismiss keyboard on return
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+    
+}
+
+#pragma - Deals with adjusting the keyboard with the screen show that if a text box is selected keyboard moves down
+
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+    
+    // Step 1: Get the size of the keyboard.
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    _scroller.contentInset = contentInsets;
+    _scroller.scrollIndicatorInsets = contentInsets;
+    
+    
+    
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= keyboardSize.height;
+    CGPoint scrollPoint;
+
+ if (!CGRectContainsPoint(aRect, _txtLastName.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _txtLastName.frame.origin.y - (keyboardSize.height));
+    }
+    else if ( !CGRectContainsPoint(aRect, _txtAge.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _txtAge.frame.origin.y - (keyboardSize.height));
+    }
+    else if (  !CGRectContainsPoint(aRect, _txtDepartment.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _txtDepartment.frame.origin.y - (keyboardSize.height));
+    }
+    else if (!CGRectContainsPoint(aRect, _txtDesignation.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _txtDesignation.frame.origin.y - (keyboardSize.height));
+    }
+    else if (!CGRectContainsPoint(aRect, _txtTagLine.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _txtTagLine.frame.origin.y - (keyboardSize.height));
+    }
+
+    
+    [_scroller setContentOffset:scrollPoint animated:YES];
+    
+    //_scroller.contentOffset = CGPointMake(0, [_scroller convertPoint:CGPointZero fromView:textField].y - 60);
+    
+    
+}
+
+
+- (void) keyboardWillHide:(NSNotification *)notification {
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scroller.contentInset = contentInsets;
+    _scroller.scrollIndicatorInsets = contentInsets;
+}
+
+
+/*- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _txtAge = textField;
+    _txtDepartment = textField;
+    _txtDesignation= textField;
+    _txtEmpID = textField;
+    _txtFirstName = textField;
+    _txtLastName = textField;
+    _txtTagLine= textField;
+    _txtImage = textField;
+    
+    
+}*/
+
+/*- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    _txtAge = nil;
+    _txtDepartment = nil;
+    _txtDesignation= nil;
+    _txtEmpID = nil;
+    _txtFirstName = nil;
+    _txtLastName = nil;
+    _txtTagLine= nil;
+    _txtImage = nil;
+}*/
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x > 0  ||  scrollView.contentOffset.x < 0 )
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+}
+
 
 @end

@@ -29,8 +29,27 @@
     self.nameValue.delegate = self;
     self.designationValue.delegate = self;
     
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
 //    [self loadData];
 
+}
+
+-(void)viewDidUnload
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 
@@ -140,16 +159,17 @@
     {
     DetailViewController *destViewController = segue.destinationViewController;
         
-    destViewController.actualFirstName  = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"firstName"]];
-    destViewController.actualLastName = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lastName"]];
-    destViewController.actualAge = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"age"]];
-    destViewController.actualDesignation = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"designation"]];
+        destViewController.actualFirstName  = [NSString stringWithFormat:@"First Name : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"firstName"]]];
+                                           
+    destViewController.actualLastName = [NSString stringWithFormat:@"Last Name : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lastName"]] ];
+    destViewController.actualAge = [NSString stringWithFormat:@"Age : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"age"]]];
+    destViewController.actualDesignation = [NSString stringWithFormat:@"Designation : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"designation"]] ];
 
-    destViewController.actualDepartment = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"department"]];
+    destViewController.actualDepartment = [NSString stringWithFormat:@"Department : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"department"]] ];
         
     destViewController.actualImageView  = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"image"]];
 
-    destViewController.actualTagLine  = [[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"tagLine"]];
+    destViewController.actualTagLine  = [NSString stringWithFormat:@"TagLine : %@ \n",[[_results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"tagLine"] ]];
         
          NSLog(@"%@",destViewController.actualImageView );
         
@@ -179,6 +199,76 @@
     }
 
 }
+
+
+- (void)scrollTap:(UIGestureRecognizer*)gestureRecognizer{
+    
+    [self.view endEditing:YES];
+}
+
+// Dismiss keyboard on return
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+    
+}
+
+#pragma - Deals with adjusting the keyboard with the screen show that if a text box is selected keyboard moves down
+
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+    
+    // Step 1: Get the size of the keyboard.
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    _scroller.contentInset = contentInsets;
+    _scroller.scrollIndicatorInsets = contentInsets;
+    
+    
+    
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= keyboardSize.height;
+    CGPoint scrollPoint;
+    
+    if (!CGRectContainsPoint(aRect, _empidValue.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _empidValue.frame.origin.y - (keyboardSize.height));
+    }
+    else if ( !CGRectContainsPoint(aRect, _nameValue.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _nameValue.frame.origin.y - (keyboardSize.height));
+    }
+    else if (  !CGRectContainsPoint(aRect, _designationValue.frame.origin))
+    {
+        
+        scrollPoint = CGPointMake(0.0, _designationValue.frame.origin.y - (keyboardSize.height));
+    }
+ 
+    
+    [_scroller setContentOffset:scrollPoint animated:YES];
+    
+    //_scroller.contentOffset = CGPointMake(0, [_scroller convertPoint:CGPointZero fromView:textField].y - 60);
+    
+    
+}
+
+
+- (void) keyboardWillHide:(NSNotification *)notification {
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scroller.contentInset = contentInsets;
+    _scroller.scrollIndicatorInsets = contentInsets;
+}
+
 
 
 

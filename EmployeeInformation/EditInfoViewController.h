@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditInfoViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditInfoViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtEmpID;
 

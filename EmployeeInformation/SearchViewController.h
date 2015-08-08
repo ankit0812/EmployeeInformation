@@ -10,6 +10,8 @@
 
 @interface SearchViewController : UIViewController <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+
 @property (weak, nonatomic) IBOutlet UITextField *empidValue;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameValue;

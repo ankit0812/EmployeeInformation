@@ -33,8 +33,15 @@
     _TagLine.text=_actualTagLine;
     _imageView.image=[self loadImage:_actualImageView];
     
+    _scroller.delegate=self;
+    [_scroller setShowsHorizontalScrollIndicator:NO];
+    
+    
     
 }
+float oldX; // here or better in .h interface
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,5 +67,11 @@
     NSString *path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString:name] ];
     UIImage* image = [UIImage imageWithContentsOfFile:path];
     return image;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x > 0  ||  scrollView.contentOffset.x < 0 )
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
 }
 @end
